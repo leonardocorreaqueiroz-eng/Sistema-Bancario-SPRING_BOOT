@@ -17,7 +17,9 @@ public class Transferencia extends Movimentacao {
     @Getter
     @ManyToOne
     @JoinColumn(name = "conta_destino_numero")
-    private final Conta contaDestino;
+    private Conta contaDestino;
+    public Transferencia(){
+    }
 
     public Transferencia(LocalDate data, LocalTime hora, BigDecimal valor,
                          Conta conta1, Conta conta2,

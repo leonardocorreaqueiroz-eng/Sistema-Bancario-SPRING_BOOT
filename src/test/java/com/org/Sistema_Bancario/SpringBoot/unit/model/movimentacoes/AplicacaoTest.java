@@ -6,6 +6,7 @@ import com.org.Sistema_Bancario.SpringBoot.model.DirecaoMovimentacao;
 import com.org.Sistema_Bancario.SpringBoot.model.StatusAplicacao;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoConta;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoMovimentacao;
+import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Aplicacao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

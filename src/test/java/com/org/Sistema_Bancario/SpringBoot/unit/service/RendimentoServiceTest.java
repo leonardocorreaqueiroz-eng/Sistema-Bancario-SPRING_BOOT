@@ -11,6 +11,7 @@ import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Aplicacao;
 import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Rendimentos;
 import com.org.Sistema_Bancario.SpringBoot.repository.AplicacaoRepository;
 import com.org.Sistema_Bancario.SpringBoot.repository.TransferenciaRepository;
+import com.org.Sistema_Bancario.SpringBoot.service.RendimentoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

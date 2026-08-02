@@ -3,6 +3,7 @@ package com.org.Sistema_Bancario.SpringBoot.unit.service;
 import com.org.Sistema_Bancario.SpringBoot.config.JwtProperties;
 import com.org.Sistema_Bancario.SpringBoot.model.ClienteDetails;
 import com.org.Sistema_Bancario.SpringBoot.model.Cliente;
+import com.org.Sistema_Bancario.SpringBoot.service.JWTService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -11,6 +11,9 @@ import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Movimentacao;
 import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Rendimentos;
 import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Saque;
 import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Transferencia;
+import com.org.Sistema_Bancario.SpringBoot.repository.ClienteRepository;
+import com.org.Sistema_Bancario.SpringBoot.repository.ContaRepository;
+import com.org.Sistema_Bancario.SpringBoot.repository.ExtratoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 class ExtratoRepositoryTest {

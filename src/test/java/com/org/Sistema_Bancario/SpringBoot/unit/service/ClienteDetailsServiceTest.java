@@ -5,6 +5,7 @@ import com.org.Sistema_Bancario.SpringBoot.model.ClienteDetails;
 import com.org.Sistema_Bancario.SpringBoot.model.Conta;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoConta;
 import com.org.Sistema_Bancario.SpringBoot.repository.ContaRepository;
+import com.org.Sistema_Bancario.SpringBoot.service.ClienteDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

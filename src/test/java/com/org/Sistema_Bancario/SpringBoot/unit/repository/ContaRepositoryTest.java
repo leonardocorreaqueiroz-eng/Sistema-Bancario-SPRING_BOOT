@@ -3,6 +3,8 @@ package com.org.Sistema_Bancario.SpringBoot.unit.repository;
 import com.org.Sistema_Bancario.SpringBoot.model.Cliente;
 import com.org.Sistema_Bancario.SpringBoot.model.Conta;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoConta;
+import com.org.Sistema_Bancario.SpringBoot.repository.ClienteRepository;
+import com.org.Sistema_Bancario.SpringBoot.repository.ContaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

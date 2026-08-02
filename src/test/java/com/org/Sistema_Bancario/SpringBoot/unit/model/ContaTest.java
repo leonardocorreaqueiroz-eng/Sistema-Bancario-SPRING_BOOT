@@ -2,6 +2,10 @@ package com.org.Sistema_Bancario.SpringBoot.unit.model;
 
 import com.org.Sistema_Bancario.SpringBoot.exceptions.SaldoInsuficienteException;
 import com.org.Sistema_Bancario.SpringBoot.exceptions.ValorInvalidoException;
+import com.org.Sistema_Bancario.SpringBoot.model.Cliente;
+import com.org.Sistema_Bancario.SpringBoot.model.Conta;
+import com.org.Sistema_Bancario.SpringBoot.model.RegrasDeBanco;
+import com.org.Sistema_Bancario.SpringBoot.model.TipoConta;
 import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -8,6 +8,9 @@ import com.org.Sistema_Bancario.SpringBoot.model.StatusAplicacao;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoConta;
 import com.org.Sistema_Bancario.SpringBoot.model.TipoMovimentacao;
 import com.org.Sistema_Bancario.SpringBoot.model.movimentacoes.Aplicacao;
+import com.org.Sistema_Bancario.SpringBoot.repository.AplicacaoRepository;
+import com.org.Sistema_Bancario.SpringBoot.repository.ClienteRepository;
+import com.org.Sistema_Bancario.SpringBoot.repository.ContaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +21,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 class AplicacaoRepositoryTest {

@@ -1,5 +1,6 @@
 package com.org.Sistema_Bancario.SpringBoot.unit.util;
 
+import com.org.Sistema_Bancario.SpringBoot.util.CPFValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 @Entity
 public class Saque extends Movimentacao {
+    public Saque() {}
 
     public Saque(Conta conta, BigDecimal valor, LocalDate data, LocalTime hora,
                  TipoMovimentacao tipo, DirecaoMovimentacao direcaoMovimentacao) {

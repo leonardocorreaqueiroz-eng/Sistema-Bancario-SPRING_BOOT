@@ -55,6 +55,9 @@ public class ContaController {
     @GetMapping("/conta/saldo")
     public ResponseEntity<BigDecimal> saldoConta(Authentication auth,
                                  @RequestParam TipoConta tipo){
+        System.out.println("ENTROU NO SALDO");
+        System.out.println(auth.getName());
+        System.out.println(tipo);
         String cpf = auth.getName();
         return new ResponseEntity<>(contaService.saldoConta(cpf,tipo),HttpStatus.OK);
     }
