@@ -17,6 +17,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @WebMvcTest(ContaController.class)
 class ContaControllerSecurityTest {
@@ -83,8 +85,7 @@ class ContaControllerSecurityTest {
                         .with(user(cliente.getCpf())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(objectMapper
-                        .writeValueAsString(contaCorrente.getSaldo())));
-
+                .andExpect(jsonPath("$.saldo").value(contaCorrente.getSaldo()
+                        .setScale(1, RoundingMode.UNNECESSARY)));
     }
 }

@@ -45,6 +45,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -228,7 +229,7 @@ public class MovimentacaoControllerIT {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new ValorRequest(valor))))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Saque realizado com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Saque realizado com sucesso!"));
         Conta conta = contaRepository.findByCpf(cliente.getCpf(),TipoConta.CORRENTE).orElseThrow();
         assertAll(
                 () -> assertEquals(conta.getSaldo(), resultado),
@@ -266,7 +267,7 @@ public class MovimentacaoControllerIT {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(new ValorRequest(valor))))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Depósito realizado com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Depósito realizado com sucesso!"));
         Conta conta = contaRepository.findByCpf(cliente.getCpf(),TipoConta.CORRENTE).orElseThrow();
         assertAll(
                 () -> assertEquals(conta.getSaldo(), valor),
@@ -322,7 +323,7 @@ public class MovimentacaoControllerIT {
                                                 valor,
                                                 TipoMovimentacao.PIX))))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Transferencia realizada com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Transferencia realizada com sucesso!"));
         Conta conta1 = contaRepository.findByCpf(cliente.getCpf(),TipoConta.CORRENTE).orElseThrow();
         Conta conta2 = contaRepository.findByCpf(cliente2.getCpf(),TipoConta.CORRENTE).orElseThrow();
         assertAll(
@@ -408,7 +409,7 @@ public class MovimentacaoControllerIT {
                                                 valor,
                                                 TipoMovimentacao.APLICACAO))))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Transferencia realizada com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Transferencia realizada com sucesso!"));
         Conta conta1 = contaRepository.findByCpf(cliente.getCpf(),TipoConta.CORRENTE).orElseThrow();
         Conta conta2 = contaRepository.findByCpf(cliente.getCpf(),TipoConta.INVESTIMENTO).orElseThrow();
         assertAll(
@@ -457,7 +458,7 @@ public class MovimentacaoControllerIT {
                                                 valor,
                                                 TipoMovimentacao.RESGATE))))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Transferencia realizada com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Transferencia realizada com sucesso!"));
         Conta conta1 = contaRepository.findByCpf(cliente.getCpf(),TipoConta.CORRENTE).orElseThrow();
         assertAll(
                 () -> assertEquals(valor, conta1.getSaldo()),

@@ -182,7 +182,7 @@ class MovimentacaoControllerTest {
                                 }
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Saque realizado com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Saque realizado com sucesso!"));
 
         verify(movimentacaoService).realizarMovimentacao(
                 cliente.getCpf(),
@@ -203,7 +203,7 @@ class MovimentacaoControllerTest {
                                 }
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Depósito realizado com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Depósito realizado com sucesso!"));
 
         verify(movimentacaoService).realizarMovimentacao(
                 cliente.getCpf(),
@@ -226,7 +226,7 @@ class MovimentacaoControllerTest {
                                 }
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Transferencia realizada com sucesso!"));
+                .andExpect(jsonPath("$.mensagem").value("Transferencia realizada com sucesso!"));
         verify(movimentacaoService).transferir(
                 cliente.getCpf(),
                 "12345678906",

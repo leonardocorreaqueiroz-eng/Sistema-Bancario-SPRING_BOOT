@@ -5,6 +5,7 @@ import com.org.Sistema_Bancario.SpringBoot.dto.ContaResponse;
 import com.org.Sistema_Bancario.SpringBoot.dto.LoginRequest;
 import com.org.Sistema_Bancario.SpringBoot.dto.LoginResponse;
 import com.org.Sistema_Bancario.SpringBoot.dto.MovimentacaoResponse;
+import com.org.Sistema_Bancario.SpringBoot.dto.SaldoResponse;
 import com.org.Sistema_Bancario.SpringBoot.dto.TransferenciaRequest;
 import com.org.Sistema_Bancario.SpringBoot.dto.ValorRequest;
 import com.org.Sistema_Bancario.SpringBoot.model.Cliente;
@@ -26,7 +27,6 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,11 +45,10 @@ public class FluxoCompletoE2ETest {
         CadastroRequest cadastroRequest = getCadastroRequest(cliente);
         LoginRequest loginRequest = getLoginRequest(cliente);
 
-        given().contentType(ContentType.JSON).body(cadastroRequest)
-                .when()
-                .post("/api/criarConta")
+        assertEquals("Conta criada com sucesso!", given().contentType(ContentType.JSON).body(cadastroRequest)
+                .when().post("/api/criarConta")
                 .then().statusCode(HttpStatus.CREATED.value())
-                .body(equalTo("Conta criada com sucesso!"));
+                .extract().jsonPath().get("mensagem").toString());
 
 
         String token = getToken(loginRequest);
@@ -137,17 +136,17 @@ public class FluxoCompletoE2ETest {
         CadastroRequest cadastroRequest2 = getCadastroRequest(cliente2);
         LoginRequest loginRequest2 = getLoginRequest(cliente2);
 
-        given().contentType(ContentType.JSON).body(cadastroRequest)
+        assertEquals("Conta criada com sucesso!", given().contentType(ContentType.JSON).body(cadastroRequest)
                 .when().post("/api/criarConta")
                 .then().statusCode(HttpStatus.CREATED.value())
-                .body(equalTo("Conta criada com sucesso!"));
+                .extract().jsonPath().get("mensagem").toString());
 
         var tokenConta1 = getToken(loginRequest);
 
-        given().contentType(ContentType.JSON).body(cadastroRequest2)
+        assertEquals("Conta criada com sucesso!", given().contentType(ContentType.JSON).body(cadastroRequest2)
                 .when().post("/api/criarConta")
                 .then().statusCode(HttpStatus.CREATED.value())
-                .body(equalTo("Conta criada com sucesso!"));
+                .extract().jsonPath().get("mensagem").toString());
 
         var tokenConta2 = getToken(loginRequest2);
 
@@ -194,10 +193,10 @@ public class FluxoCompletoE2ETest {
         CadastroRequest cadastroRequest = getCadastroRequest(cliente);
         LoginRequest loginRequest = getLoginRequest(cliente);
 
-        given().contentType(ContentType.JSON).body(cadastroRequest)
+        assertEquals("Conta criada com sucesso!", given().contentType(ContentType.JSON).body(cadastroRequest)
                 .when().post("/api/criarConta")
                 .then().statusCode(HttpStatus.CREATED.value())
-                .body(equalTo("Conta criada com sucesso!"));
+                .extract().jsonPath().get("mensagem").toString());
 
         var tokenConta1 = getToken(loginRequest);
 
@@ -278,6 +277,6 @@ public class FluxoCompletoE2ETest {
                 .queryParam("tipo", corrente)
                 .when().get("/api/conta/saldo")
                 .then().statusCode(HttpStatus.OK.value())
-                .extract().as(BigDecimal.class);
+                .extract().as(SaldoResponse.class).saldo();
     }
 }

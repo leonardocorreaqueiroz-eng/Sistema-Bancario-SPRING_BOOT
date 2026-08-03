@@ -3,6 +3,7 @@ package com.org.Sistema_Bancario.SpringBoot.integration.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.org.Sistema_Bancario.SpringBoot.dto.CadastroRequest;
 import com.org.Sistema_Bancario.SpringBoot.dto.LoginRequest;
+import com.org.Sistema_Bancario.SpringBoot.dto.MensagemResponse;
 import com.org.Sistema_Bancario.SpringBoot.model.Cliente;
 import com.org.Sistema_Bancario.SpringBoot.model.Conta;
 import com.org.Sistema_Bancario.SpringBoot.model.DirecaoMovimentacao;
@@ -74,7 +75,7 @@ public class ContaControllerIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(cadastroRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(content().string("Conta criada com sucesso!"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
     @Test
     void deveLancarCpfInvalidoExceptionAoCadastrarConta() throws Exception {
@@ -148,7 +149,7 @@ public class ContaControllerIT {
                 .with(user(cliente.getCpf())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").value(contaCorrente.getSaldo()
+                .andExpect(jsonPath("$.saldo").value(contaCorrente.getSaldo()
                         .setScale(1, RoundingMode.UNNECESSARY)));
     }
     @Test
@@ -189,7 +190,7 @@ public class ContaControllerIT {
                 .with(user(cliente.getCpf())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").value(contaInvestimento.getSaldo()));
+                .andExpect(jsonPath("$.saldo").value(contaInvestimento.getSaldo()));
     }
     @Test
     void deveLancarAplicacaoNaoEncontradaExceptionMostrarSaldoNaContaInvestimento() throws Exception {
