@@ -17,7 +17,7 @@ API REST de um sistema bancário desenvolvida com **Java 21 e Spring Boot 4**, s
 
 ## 🏗️ Arquitetura e Infraestrutura
 
-A aplicação pode ser executada com múltiplas instâncias da API atrás de um **Nginx atuando como Load Balancer**.
+A aplicação é executada com duas instâncias da API atrás de um Nginx atuando como Load Balancer.
 
 ```text
                     ┌─────────────────┐
@@ -96,7 +96,7 @@ Principais recursos:
 
 ## 🧪 Testes Automatizados
 
-O projeto possui **111 testes automatizados**, distribuídos entre diferentes níveis:
+O projeto possui **111 testes automatizados**, abrangendo diferentes componentes e fluxos da aplicação:
 
 * Testes unitários;
 * Testes de integração;
@@ -106,7 +106,7 @@ O projeto possui **111 testes automatizados**, distribuídos entre diferentes n�
 * Testes de segurança;
 * Testes End-to-End (E2E).
 
-A divisão dos testes busca validar tanto componentes isolados quanto fluxos completos da aplicação.
+A suíte de testes busca validar tanto componentes isolados quanto fluxos completos da aplicação.
 
 ## ⚠️ Tratamento de Exceções
 
@@ -145,34 +145,6 @@ A API possui documentação interativa utilizando **Swagger / OpenAPI**.
 
 Com a aplicação em execução, a documentação pode ser acessada através do Swagger UI.
 
-## 🐳 Execução com Docker
-
-O projeto possui configuração para execução utilizando **Docker Compose**.
-
-A infraestrutura inclui:
-
-* MySQL;
-* Duas instâncias da API Spring Boot;
-* Nginx como Load Balancer;
-* Rede Docker compartilhada entre os serviços;
-* Volume persistente para o MySQL;
-* Healthcheck do banco de dados;
-* Variáveis de ambiente para configuração sensível.
-
-Para iniciar os serviços:
-
-```bash
-docker compose up --build
-```
-
-A API pode ser acessada através do Nginx:
-
-```text
-http://localhost:8080
-```
-
-> As credenciais e configurações sensíveis são mantidas em variáveis de ambiente e não devem ser versionadas no repositório.
-
 ## 📌 Objetivos do Projeto
 
 Este projeto foi desenvolvido com foco em praticar conceitos utilizados no desenvolvimento de APIs backend modernas, incluindo:
@@ -198,3 +170,143 @@ Este projeto foi desenvolvido com foco em praticar conceitos utilizados no desen
 ### 🚀 Evolução do Projeto
 
 O projeto está em evolução contínua, com implementação gradual de recursos relacionados a **backend, segurança, testes, containerização e infraestrutura**.
+
+---
+
+## 🐳 Execução com Docker
+
+O projeto possui uma infraestrutura baseada em **Docker Compose**, composta por:
+
+* MySQL;
+* Duas instâncias da API Spring Boot;
+* Nginx como Load Balancer;
+* Rede Docker compartilhada entre os serviços;
+* Volume persistente para o MySQL;
+* Healthcheck do banco de dados;
+* Variáveis de ambiente para configuração sensível.
+
+### Pré-requisitos
+
+Para executar o projeto, é necessário ter instalado:
+
+* Docker
+* Docker Compose
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/leonardocorreaqueiroz-eng/Sistema-Bancario-SPRING_BOOT.git
+cd Sistema-Bancario-SPRING_BOOT
+```
+
+### 2. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto com base no arquivo `.env.example`.
+
+```bash
+cp .env.example .env
+```
+
+Preencha as variáveis do `.env` com os valores desejados.
+
+Exemplo da estrutura:
+
+```env
+# Spring Boot
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+JWT_SECRET=
+
+# MySQL
+MYSQL_ROOT_PASSWORD=
+MYSQL_DATABASE=
+MYSQL_USER=
+MYSQL_PASSWORD=
+```
+
+> O arquivo `.env` contém configurações sensíveis e não deve ser versionado no repositório.
+
+> Quando executada pelo Docker Compose, a aplicação utiliza `mysql` como `DB_HOST`, pois esse é o nome do serviço MySQL na rede Docker.
+
+### 3. Inicie os serviços
+
+```bash
+docker compose up --build
+```
+
+O Docker Compose iniciará:
+
+* MySQL;
+* `api-java1`;
+* `api-java2`;
+* Nginx.
+
+### 4. Acesse a API
+
+A aplicação estará disponível através do Nginx:
+
+```text
+http://localhost:8080
+```
+
+O Nginx recebe as requisições e as distribui entre as duas instâncias da API.
+
+### 5. Acesse o Swagger / OpenAPI
+
+A documentação interativa da API está disponível em:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+### 6. Verifique o Load Balancing
+
+O endpoint:
+
+```http
+GET /api/instance
+```
+
+permite identificar qual instância processou a requisição.
+
+Para realizar múltiplas requisições:
+
+```bash
+for i in {1..10}; do
+    curl -s http://localhost:8080/api/instance
+    echo
+done
+```
+
+Um possível resultado é:
+
+```text
+api-java1
+api-java2
+api-java1
+api-java2
+api-java2
+api-java1
+```
+
+Isso permite visualizar a distribuição das requisições entre as instâncias da API.
+
+### 7. Encerrar os containers
+
+Para parar os serviços:
+
+```bash
+docker compose down
+```
+
+Para remover também o volume persistente do MySQL:
+
+```bash
+docker compose down -v
+```
+
+> O comando `docker compose down -v` remove os volumes associados ao projeto e, consequentemente, os dados persistidos do banco de dados.
+
+
