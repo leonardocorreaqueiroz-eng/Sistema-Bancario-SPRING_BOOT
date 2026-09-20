@@ -49,7 +49,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/criarConta", "/api/auth/login")
+                        .requestMatchers("/api/criarConta", "/api/auth/login","/api/instance")
                         .permitAll()
                         .requestMatchers(AUTH_WHITELIST)
                         .permitAll()
