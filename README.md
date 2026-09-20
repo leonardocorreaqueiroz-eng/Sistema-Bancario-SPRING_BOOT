@@ -196,7 +196,7 @@ Para executar o projeto, é necessário ter instalado:
 
 ```bash
 git clone https://github.com/leonardocorreaqueiroz-eng/Sistema-Bancario-SPRING_BOOT.git
-cd Sistema-Bancario-SPRING_BOOT
+cd "Sistema_Bancário(SpringBoot)\Sistema_Bancário(SpringBoot)"
 ```
 
 ### 2. Configure as variáveis de ambiente
