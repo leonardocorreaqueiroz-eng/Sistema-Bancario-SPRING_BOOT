@@ -168,7 +168,7 @@ docker compose up --build
 A API pode ser acessada através do Nginx:
 
 ```text
-http://localhost:8080/swagger-ui/index.html#
+http://localhost:8080
 ```
 
 > As credenciais e configurações sensíveis são mantidas em variáveis de ambiente e não devem ser versionadas no repositório.
