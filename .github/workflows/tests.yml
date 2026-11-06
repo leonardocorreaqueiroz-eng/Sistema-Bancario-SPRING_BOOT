@@ -22,4 +22,6 @@ jobs:
           java-version: '21'
 
       - name: Executar testes
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: mvn clean test
