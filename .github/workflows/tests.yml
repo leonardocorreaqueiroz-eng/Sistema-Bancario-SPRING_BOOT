@@ -20,8 +20,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: maven
 
-      - name: Executar testes
+      - name: Testes e build
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        run: mvn clean test
+        run: mvn clean verify
