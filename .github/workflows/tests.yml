@@ -26,3 +26,9 @@ jobs:
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: mvn clean verify
+
+      - name: Armazenar JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: sistema-bancario
+          path: target/*.jar
