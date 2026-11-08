@@ -34,5 +34,4 @@ jobs:
           path: target/*.jar
 
       - name: Construir Imagem Docker
-        run: |
-          docker build -t sistema-bancario .
+        run: docker build -t sistema-bancario -f api.dockerfile .
