@@ -14,9 +14,7 @@ services:
       timeout: 5s
       retries: 10
   api-java1:
-    build:
-      context: .
-      dockerfile: api.dockerfile
+    image: ghcr.io/leonardocorreaqueiroz-eng/sistema-bancario:latest
     container_name: api-java1
     env_file:
       - .env
@@ -30,9 +28,7 @@ services:
       mysql:
         condition: service_healthy
   api-java2:
-    build:
-      context: .
-      dockerfile: api.dockerfile
+    image: ghcr.io/leonardocorreaqueiroz-eng/sistema-bancario:latest
     container_name: api-java2
     env_file:
       - .env
