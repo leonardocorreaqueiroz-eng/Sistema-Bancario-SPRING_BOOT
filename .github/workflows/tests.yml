@@ -50,5 +50,5 @@ jobs:
         with:
           context: .
           file: ./api.dockerfile
-          push: ${{ github.event_name == 'push'
+          push: ${{ github.event_name == 'push' }}
           tags: ghcr.io/leonardocorreaqueiroz-eng/sistema-bancario:latest
